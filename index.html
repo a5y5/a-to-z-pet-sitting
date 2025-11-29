@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,13 +11,11 @@
   <style>
     :root {
       --olive: #556b2f;
-      --pastel-green: #ddefd3;
       --pastel-pink: #faddeb;
+      --paper-bg: #faddeb;
+      --card-bg: #ffffff;
       --text: #253024;
-      --muted: #4b4f46;
-      --panel: #ffffff;
-      --bg: #f9f6f0;
-      --shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      --radius: 24px;
     }
 
     * {
@@ -25,373 +24,397 @@
 
     body {
       margin: 0;
-      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at 15% 20%, rgba(250, 221, 235, 0.25), transparent 30%),
-                  radial-gradient(circle at 85% 10%, rgba(221, 239, 211, 0.4), transparent 28%),
-                  var(--bg);
+      font-family: "Poppins", sans-serif;
+      background-color: var(--paper-bg);
       color: var(--text);
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
     }
 
-    a {
-      color: inherit;
-    }
-
-    .wrap {
-      max-width: 1100px;
+    .container {
+      max-width: 1000px;
       margin: 0 auto;
-      padding: 0 1.2rem 3rem;
+      padding: 20px;
     }
 
+    /* Header Layout */
     header {
-      background: linear-gradient(120deg, var(--olive), #6c8b3d, var(--pastel-green));
-      color: #fdfdfd;
-      padding: 1.5rem 0 2.25rem;
-      border-bottom-left-radius: 18px;
-      border-bottom-right-radius: 18px;
-      box-shadow: var(--shadow);
-    }
-
-    .header-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 1.2rem;
-      display: grid;
-      gap: 1.2rem;
-    }
-
-    .brand {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 0.85rem;
-      flex-wrap: wrap;
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      margin-top: 0.4rem;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: #fdfdfd;
-      padding: 0.4rem 0.7rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.32);
-      background: rgba(255, 255, 255, 0.12);
-      font-size: 0.9rem;
-    }
-
-    nav a:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .logo {
-      width: 56px;
-      height: 56px;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      display: grid;
-      place-items: center;
-      font-weight: 700;
-      font-size: 1.1rem;
-      letter-spacing: 0.04em;
-    }
-
-    .brand h1 {
-      margin: 0;
-      font-size: 1.7rem;
-      letter-spacing: -0.02em;
-    }
-
-    .brand p {
-      margin: 0.1rem 0 0;
-      opacity: 0.9;
-      font-size: 0.98rem;
-    }
-
-    .hero {
-      display: grid;
-      gap: 0.65rem;
-    }
-
-    .hero h2 {
-      margin: 0;
-      font-size: 1.35rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.35rem 0.75rem;
-      background: rgba(255, 255, 255, 0.22);
-      border: 1px solid rgba(255, 255, 255, 0.28);
-      border-radius: 999px;
-      font-size: 0.92rem;
-    }
-
-    main {
-      margin-top: -0.6rem;
+      margin-bottom: 30px;
       position: relative;
-      z-index: 1;
     }
 
-    section {
-      background: var(--panel);
-      border-radius: 16px;
-      padding: 1.35rem 1.25rem 1.6rem;
-      margin-bottom: 1rem;
-      box-shadow: var(--shadow);
-      border: 1px solid #efe6d7;
+    @media (min-width: 768px) {
+      header {
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: 20px;
+      }
     }
 
-    section h3 {
-      margin: 0 0 0.5rem;
-      font-size: 1.15rem;
-      display: inline-block;
-      border-bottom: 3px solid var(--pastel-pink);
-      padding-bottom: 0.25rem;
+    /* Logo */
+    .logo-container {
+      position: relative;
+      z-index: 10;
+      flex-shrink: 0;
     }
 
-    .list {
+    .logo-img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 5px solid var(--olive);
+      object-fit: cover;
+      background: white;
+      box-shadow: 0 4px 12px rgba(85, 107, 47, 0.15);
+      transition: transform 0.3s ease;
+    }
+
+    .logo-img:hover {
+      transform: scale(1.02);
+    }
+
+    /* Navigation */
+    .nav-bar {
+      background-color: white;
+      border: 3px solid var(--olive);
+      padding: 15px 20px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(85, 107, 47, 0.1);
+      border-radius: var(--radius);
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    @media (min-width: 768px) {
+      .nav-bar {
+        margin-top: 0;
+        margin-left: -30px;
+        padding-left: 50px;
+        justify-content: flex-end;
+        width: auto;
+        flex-grow: 1;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        position: relative;
+        z-index: 5;
+      }
+    }
+
+    .nav-item {
+      background: none;
+      border: 2px solid transparent;
+      padding: 8px 24px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--olive);
+      background: rgba(85, 107, 47, 0.05);
+      border-radius: 50px;
+      transition: all 0.2s;
+      font-family: "Poppins", sans-serif;
+    }
+
+    .nav-item:hover,
+    .nav-item.active {
+      background-color: var(--olive);
+      color: white;
+    }
+
+    /* Content Cards */
+    .content-card {
+      background-color: var(--card-bg);
+      border: 3px solid var(--olive);
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 24px rgba(85, 107, 47, 0.1);
+      border-radius: var(--radius);
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: var(--olive);
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      color: var(--olive);
+      margin-bottom: 0.5rem;
+    }
+
+    p,
+    li {
+      font-size: 1.05rem;
+    }
+
+    ul {
       padding-left: 1.2rem;
-      margin: 0.35rem 0 0;
     }
 
-    .list li {
-      margin-bottom: 0.25rem;
+    li {
+      margin-bottom: 0.5rem;
     }
 
+    /* Grid for Services/Schedule */
     .grid {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 0.8rem;
+      gap: 1.5rem;
+      margin-top: 1rem;
     }
 
-    .card {
-      border: 1px solid #f0e8dc;
-      border-radius: 12px;
-      padding: 0.95rem 1rem;
-      background: #fffaf6;
+    @media (min-width: 600px) {
+      .grid.two {
+        grid-template-columns: 1fr 1fr;
+      }
     }
 
-    .card h4 {
-      margin: 0 0 0.25rem;
-      font-size: 1rem;
+    .sub-card {
+      border: 2px solid #e0e0e0;
+      padding: 20px;
+      border-radius: 16px;
+      background: #fcfcfc;
+      transition: transform 0.2s;
+    }
+
+    .sub-card:hover {
+      border-color: var(--olive);
+      transform: translateY(-2px);
+    }
+
+    .sub-card h4 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.2rem;
       color: var(--olive);
     }
 
     .price {
       font-weight: 700;
       color: #b7496c;
-      margin: 0.3rem 0;
     }
 
     .note {
-      font-size: 0.93rem;
-      color: var(--muted);
+      font-size: 0.9rem;
+      color: #666;
+      font-style: italic;
     }
 
-    .highlight {
-      border-radius: 12px;
-      padding: 0.9rem 1rem;
-      background: var(--pastel-green);
-      border: 1px solid rgba(0, 0, 0, 0.04);
-      font-size: 0.98rem;
+    /* Utility */
+    .hidden {
+      display: none;
     }
 
-    .contact {
-      background: var(--pastel-pink);
-      border: 1px solid rgba(0, 0, 0, 0.05);
+    /* Contact Section */
+    .contact-section {
+      background-color: #fff0f5;
+      border-color: #f8bbd0;
     }
 
-    .contact h4 {
-      margin: 0 0 0.35rem;
-      color: #7a2c48;
+    .contact-number {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #b7496c;
     }
 
-    .contact .number {
-      font-size: 1.05rem;
-      font-weight: 700;
-    }
-
-    .contact a {
-      color: #7a2c48;
+    .contact-number a {
       text-decoration: none;
+      color: inherit;
     }
 
-    .contact a:hover {
-      text-decoration: underline;
+    /* Map */
+    .map-container {
+      margin-top: 1.5rem;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 2px solid var(--olive);
+    }
+
+    iframe {
+      width: 100%;
+      display: block;
     }
 
     footer {
       text-align: center;
-      font-size: 0.88rem;
-      color: #666;
-      padding: 0.5rem 0 1.5rem;
-    }
-
-    @media (min-width: 720px) {
-      header {
-        padding: 2.1rem 0 2.8rem;
-      }
-
-      .header-inner {
-        grid-template-columns: 1.4fr 1fr;
-        align-items: center;
-      }
-
-      .hero h2 {
-        font-size: 1.55rem;
-      }
-
-      .grid.two {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .grid.three {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
+      margin-top: 40px;
+      color: var(--olive);
+      opacity: 0.8;
+      font-size: 0.9rem;
     }
   </style>
 </head>
+
 <body>
-  <header>
-    <div class="header-inner">
-      <div class="brand">
-        <div class="logo">A·Z</div>
-        <div>
-          <h1>A to Z Pet Sitting</h1>
-          <p>Loving care for every pet in the neighborhood</p>
-        </div>
+
+  <div class="container">
+
+    <header>
+      <div class="logo-container">
+        <img src="AtoZ-logo.png" alt="A to Z Pet Sitting Logo" class="logo-img">
       </div>
-    </div>
-  </header>
+      <nav class="nav-bar">
+        <button class="nav-item active" onclick="showTab('about')">About</button>
+        <button class="nav-item" onclick="showTab('services')">Services</button>
+        <button class="nav-item" onclick="showTab('schedule')">Schedule</button>
+      </nav>
+    </header>
 
-  <main class="wrap">
+    <main>
 
-    <section id="about">
-      <h3>About Me</h3>
-      <p>
-        I am Amelia, and I run <strong>A to Z Pet Sitting</strong>. I had this business in my old neighborhood, and now that my family has moved, I am excited to meet new pets and help new families.
-      </p>
-      <p>
-        A to Z Pet Sitting is called that because I will pet sit any animal (except tarantulas 😖).
-      </p>
-      <p>I have experience with:</p>
-      <ul class="list">
-        <li>Big dogs, small dogs, shy dogs, and senior dogs</li>
-        <li>Three legged and special needs dogs</li>
-        <li>Cats, kittens, and other small pets</li>
-        <li>Pets who need extra comfort, attention, or playtime</li>
-      </ul>
-      <p>I love animals, I love playing with them, and I always keep their routines the same so they feel safe and happy while you are away.</p>
-    </section>
+      <!-- DYNAMIC CONTENT AREA -->
 
-    <section id="dog">
-      <h3>My Dog</h3>
-      <p>
-        I have a <strong>red golden retriever</strong> who is super cute and very friendly. If your pet stays at my house during a long vacation, he will be gentle, playful, and welcoming to any animal who visits.
-      </p>
-      <p class="note">
-        If your dog enjoys company, I can sometimes bring him along on walks so they have a buddy. If your dog is nervous, I will keep him home so your pet feels safe.
-      </p>
-    </section>
+      <!-- 1. ABOUT TAB -->
+      <div id="about" class="tab-content content-card">
+        <h2>About Me</h2>
+        <p>
+          I am Amelia, and I run <strong>A to Z Pet Sitting</strong>. I had this business in my old neighborhood, and
+          now
+          that my family has moved, I am excited to meet new pets and help new families.
+        </p>
+        <p>
+          A to Z Pet Sitting is called that because I will pet sit any animal (except tarantulas 😖).
+        </p>
+        <p>I have experience with:</p>
+        <ul class="list">
+          <li>Big dogs, small dogs, shy dogs, and senior dogs</li>
+          <li>Three legged and special needs dogs</li>
+          <li>Cats and other small pets</li>
+          <li>Pets who need extra comfort, attention, or playtime</li>
+        </ul>
+        <p>I love animals, I love playing with them, and I always keep their routines the same so they feel safe and
+          happy
+          while you are away.</p>
 
-    <section id="services">
-      <h3>Services and Prices</h3>
-      <div class="grid two">
-        <div class="card">
-          <h4>Dog Walking</h4>
-          <p>Short neighborhood walks for fresh air and movement.</p>
-          <p class="price">20 minute walk: 7 to 10 dollars</p>
-          <p class="note">You choose what works for you.</p>
-        </div>
-
-        <div class="card">
-          <h4>One Hour Check-Ins</h4>
-          <p>Feeding, water, playtime, cuddles, and cleanup right at your home.</p>
-          <p class="price">15 dollars per visit</p>
-        </div>
-
-        <div class="card">
-          <h4>Vacation Long Visits</h4>
-          <p>About two hours a day with your pet for a full week while you are away.</p>
-          <p class="price">100 dollars for the whole week</p>
-          <p class="note">Lots of attention and company to keep your pet relaxed.</p>
-        </div>
-
-        <div class="card">
-          <h4>Pet Sitting at My House</h4>
-          <p>For friendly, easygoing pets who enjoy new places and new friends.</p>
-          <p class="price">Contact for rates</p>
-          <p class="note">Best for very social pets.</p>
-        </div>
-
-        <div class="card">
-          <h4>Poop and Litter Cleanup</h4>
-          <p>Keeping your yard and litter box clean.</p>
-          <p class="price">Dog poop cleanup: 15 dollars</p>
-          <p class="price" style="margin-top:-0.3rem;">Cat litter box cleaning: 5 dollars</p>
-        </div>
-
-        <div class="card">
-          <h4>Multiple Pets</h4>
-          <p>I can walk up to three dogs at once and care for more than one pet during visits.</p>
+        <div style="margin-top: 2rem; border-top: 2px solid #eee; padding-top: 2rem;">
+          <h3>My Dog</h3>
+          <p>
+            I have a <strong>red golden retriever</strong> who is super cute and very friendly. If your pet stays at my
+            house during a long vacation, he will be gentle, playful, and welcoming to any animal who visits.
+          </p>
+          <p class="note">
+            If your dog enjoys company, I can sometimes bring him along on walks so they have a buddy. If your dog is
+            nervous, I will keep him home so your pet feels safe.
+          </p>
         </div>
       </div>
 
-      <div class="highlight" style="margin-top: 0.9rem;">
-        Not sure what you need yet? Tell me about your pet and your trip, and we will choose the right visits and price together.
-      </div>
-    </section>
+      <!-- 2. SERVICES TAB -->
+      <div id="services" class="tab-content content-card hidden">
+        <h2>Services and Prices</h2>
+        <div class="grid two">
+          <div class="sub-card">
+            <h4>Dog Walking</h4>
+            <p>Short neighborhood walks for fresh air and movement.</p>
+            <p class="price">20 minute walk: 7 to 10 dollars</p>
+            <p class="note">You choose what works for you.</p>
+          </div>
 
-    <section id="schedule">
-      <h3>Schedule and Area</h3>
-      <div class="grid two">
-        <div class="card">
-          <h4>During the School Year</h4>
-          <ul class="list">
-            <li>Available after school (around 4)</li>
-            <li>Schedule may change if I am in the school play (Mon–Thu)</li>
-            <li>Available weekends, except Sunday mornings during church</li>
-          </ul>
+          <div class="sub-card">
+            <h4>One Hour Check-Ins</h4>
+            <p>Feeding, water, playtime, cuddles, and cleanup right at your home.</p>
+            <p class="price">15 dollars per visit</p>
+          </div>
+
+          <div class="sub-card">
+            <h4>Vacation Long Visits</h4>
+            <p>About two hours a day with your pet for a full week while you are away.</p>
+            <p class="price">100 dollars for the whole week (may vary)</p>
+            <p class="note">Lots of attention and company to keep your pet relaxed.</p>
+          </div>
+
+          <div class="sub-card">
+            <h4>Poop and Litter Cleanup</h4>
+            <p>Keeping your yard and litter box clean.</p>
+            <p class="price">Dog poop cleanup: 15 dollars</p>
+            <p class="price" style="margin-top:0.3rem;">Cat litter box cleaning: 5 dollars</p>
+          </div>
+
         </div>
-        <div class="card">
-          <h4>Summer Time</h4>
-          <ul class="list">
-            <li>Very flexible</li>
-            <li>Available most days and times</li>
-          </ul>
+        <div
+          style="margin-top: 1.5rem; background: var(--pastel-pink); padding: 20px; border-radius: 12px; color: #7a2c48;">
+          <strong>Not sure what you need yet?</strong> Tell me about your pet and your trip, and we will choose the
+          right visits and price together.
         </div>
       </div>
-      <div class="highlight" style="margin-top: 0.9rem;">
-        <strong>Where I Work:</strong> I serve my neighborhood only, so pets stay close to home and I am always nearby.
+
+      <!-- 3. SCHEDULE TAB -->
+      <div id="schedule" class="tab-content content-card hidden">
+        <h2>Schedule and Area</h2>
+        <div class="grid two">
+          <div class="sub-card">
+            <h4>During the School Year</h4>
+            <ul>
+              <li>Available after school (around 4)</li>
+              <li>Schedule may change if I am in the school play (Mon–Thu)</li>
+              <li>Available weekends, except Sunday mornings during church</li>
+            </ul>
+          </div>
+          <div class="sub-card">
+            <h4>Summer Time</h4>
+            <ul>
+              <li>Very flexible</li>
+              <li>Available most days and times</li>
+            </ul>
+          </div>
+        </div>
+        <div style="margin-top: 2rem;">
+          <h3>Where I Work</h3>
+          <p>I serve the <strong>Hale</strong> neighborhood, so pets stay close to home and I am always nearby.</p>
+
+          <div class="map-container">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7512.553821738899!2d-93.25674945037898!3d44.907711057347356!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87f628836b032d2b%3A0xdb496dcf8aacf511!2sHale%2C%20Minneapolis%2C%20MN%2055417!5e1!3m2!1sen!2sus!4v1764382358813!5m2!1sen!2sus"
+              width="600" height="400" style="border:0;" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
       </div>
-    </section>
 
-    <section id="contact" class="contact">
-      <h3>How to Book Me</h3>
-      <p>Since I am 11, my dad handles all scheduling and questions.</p>
-      <div class="card" style="background: rgba(255,255,255,0.5); border-color: rgba(0,0,0,0.06);">
-        <h4>Contact My Dad</h4>
-        <p>To book pet sitting or walking, or to ask questions, please contact:</p>
-        <p class="number">Nicolas — <a href="tel:18436283228">843 628 3228</a></p>
-        <p class="note">Text or call, and we will talk through what your pet needs and what times work best.</p>
+      <!-- STATIC CONTACT CARD (ALWAYS VISIBLE) -->
+      <div class="content-card static contact-section">
+        <h2>How to Book Me</h2>
+        <div class="sub-card" style="background: white; border-color: var(--olive);">
+          <h4>Contact My Dad</h4>
+          <p>To book pet sitting or walking, or to ask questions, please contact:</p>
+          <p class="contact-number">Nicolas — <a href="tel:18436283228">843 628 3228</a></p>
+          <p class="note">Text or call, and we will talk through what your pet needs and what times work best.</p>
+        </div>
       </div>
-    </section>
 
-  </main>
+    </main>
 
-  <footer>
-    A to Z Pet Sitting · Amelia · Neighborhood pet care
-  </footer>
+    <footer>
+      A to Z Pet Sitting · Amelia · Neighborhood pet care
+    </footer>
+
+  </div>
+
+  <script>
+    function showTab(tabId) {
+      // Hide all tab contents
+      const tabs = document.querySelectorAll('.tab-content');
+      tabs.forEach(tab => tab.classList.add('hidden'));
+
+      // Remove active class from all buttons
+      const buttons = document.querySelectorAll('.nav-item');
+      buttons.forEach(btn => btn.classList.remove('active'));
+
+      // Show the selected tab
+      document.getElementById(tabId).classList.remove('hidden');
+
+      // Add active class to the clicked button
+      const clickedBtn = Array.from(buttons).find(b => b.getAttribute('onclick').includes(tabId));
+      if (clickedBtn) clickedBtn.classList.add('active');
+    }
+  </script>
+
 </body>
+
 </html>
